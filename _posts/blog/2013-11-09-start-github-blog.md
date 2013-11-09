@@ -3,7 +3,9 @@ layout:     post
 title:      使用github托管你的博客
 category: blog
 description: 蛋疼，瞎折腾
+tags : [intro, beginner, jekyll, tutorial]
 ---
+{% include JB/setup %}
 
 
 
