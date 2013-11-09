@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      jekyll: 使用github托管你的博客[原创]
+title:      jekyll: 使用github托管你的博客
 category: blog
 description: 蛋疼，瞎折腾
 ---
@@ -49,26 +49,41 @@ $ rvm --version
 rvm 1.23.14 (stable) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
 3.安装ruby
 在RVM中安装Ruby 1.9.3
+
 rvm install 1.9.3
+
 安装完后，测试下：
+
 gem --version
+
 如果你看到：
+
 2.1.10
+
 恭喜，你已经安装成功
+
 启用： ruby 1.9.3
+
 rvm use 1.9.3
+
 4.jekyll
 通过ruby gems安装：
+
 gem install jekyll
+
 gem install jekyll-tagging
 
 
 5.用jekyll创建博客
+
 两步创建你的博客：
 
 * Create a New Repository
+
 Go to your https://github.com and create a new repository named USERNAME.github.com
+
 *Install Jekyll-Bootstrap
+
 Enter these commands into your terminal in a directory you want your blog to be:
 
 
