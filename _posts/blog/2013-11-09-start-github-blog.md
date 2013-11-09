@@ -34,47 +34,50 @@ github作为一个被码农关注度极高的网站，在你看不见的地方�
 
 1.安装jekyll
 安装命令很简单：
-$ gem install jekyll
+    $ gem install jekyll
 不过你很可能会遇到以下错误：
-ERROR:  Error installing jekyll:    ERROR: Failed to build gem native extension....Results logged to /Library/Ruby/Gems/1.8/gems/fast-stemmer-1.0.2/ext/gem_make.out
+    ERROR:  Error installing jekyll:    
+    ERROR: Failed to build gem native extension....Results logged to /Library/Ruby/Gems/1.8/gems/fast-stemmer-1.0.2/ext/gem_make.out
+
 原因：Ruby 版本 1.8.7，太低，推荐升级到 1.9.3 。
 建议使用 RVM，然而执行安装命令
 
 2.安装rvm
 注意在安装过程中输出的信息，会提示如何使用，如我安装过程是:
-* To start using RVM you need to run `source /Users/irou/.rvm/scripts/rvm` 
+  
+    To start using RVM you need to run `source /Users/irou/.rvm/scripts/rvm` 
 
 当然也可以在打开终端时自动加载，在~/.bash_profile最后添加
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 验证下是否安装成功：
-$ rvm --version
+    $ rvm --version
 
-rvm 1.23.14 (stable) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
+    rvm 1.23.14 (stable) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
 3.安装ruby
 在RVM中安装Ruby 1.9.3
 
-rvm install 1.9.3
+    rvm install 1.9.3
 
 安装完后，测试下：
 
-gem --version
+    gem --version
 
 如果你看到：
 
-2.1.10
+    2.1.10
 
 恭喜，你已经安装成功
 
 启用： ruby 1.9.3
 
-rvm use 1.9.3
+    rvm use 1.9.3
 
 4.jekyll
 通过ruby gems安装：
 
-gem install jekyll
+    gem install jekyll
 
-gem install jekyll-tagging
+    gem install jekyll-tagging
 
 
 5.用jekyll创建博客
@@ -83,11 +86,11 @@ gem install jekyll-tagging
 
 * Create a New Repository
 
-Go to your https://github.com and create a new repository named USERNAME.github.com
+    Go to your https://github.com and create a new repository named USERNAME.github.com
 
 *Install Jekyll-Bootstrap
 
-Enter these commands into your terminal in a directory you want your blog to be:
+    Enter these commands into your terminal in a directory you want your blog to be:
 
 
 
