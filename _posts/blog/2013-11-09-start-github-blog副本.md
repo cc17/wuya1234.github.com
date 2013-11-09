@@ -1,9 +1,12 @@
 ---
 layout:     post
-title:      jekyll: 使用github托管你的博客
+title:      使用github托管你的博客
 category: blog
 description: 蛋疼，瞎折腾
 ---
+
+
+
 
 ## 最后效果
 
