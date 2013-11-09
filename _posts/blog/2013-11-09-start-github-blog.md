@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      jekyll: 使用github托管你的博客[原创]
+title:      jekyll: 使用github托管你的博客原创
 category: blog
 description: 蛋疼，瞎折腾
 ---
