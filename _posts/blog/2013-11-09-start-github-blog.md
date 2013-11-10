@@ -31,10 +31,21 @@ github作为一个被码农关注度极高的网站，在你看不见的地方�
 
 扁平化设计越来越流行了，连苹果都改了，改成了丑不拉几的ios7了。但不可否认的是现在的趋势是朝向简洁化，简洁才是王道。利用jekyll你可以轻松实现一个简洁的博客模板，然后push到github上。另外，jekyll自带了一些模块，比如：代码高亮，提供了一个可评论模块。这些才是我用jekyll，push到github托管博客的主要原因。
 
+##jekyll是个神马？？
+
+    如果你用过nodejs的express，你知道   express -t ejs blog 
+
+    如果你用过yii，你知道：yiic webapp blog
+
+    如果你用过python的django，你知道：django-admin.py startproject djproject
+
+    好吧，jekyll就是类似上面的东西，它可以快速创建一个github博客。
+
 ## 来吧，按步骤来吧，创建一个属于你的github博客
 
 
-1.安装jekyll
+### 1.安装jekyll
+
 安装命令很简单：
     $ gem install jekyll
 不过你很可能会遇到以下错误：
@@ -44,7 +55,8 @@ github作为一个被码农关注度极高的网站，在你看不见的地方�
 原因：Ruby 版本 1.8.7，太低，推荐升级到 1.9.3 。
 建议使用 RVM，然而执行安装命令
 
-2.安装rvm
+### 2.安装rvm
+
 注意在安装过程中输出的信息，会提示如何使用，如我安装过程是:
   
     To start using RVM you need to run `source /Users/irou/.rvm/scripts/rvm` 
@@ -55,7 +67,8 @@ github作为一个被码农关注度极高的网站，在你看不见的地方�
     $ rvm --version
 
     rvm 1.23.14 (stable) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
-3.安装ruby
+### 3.安装ruby
+
 在RVM中安装Ruby 1.9.3
 
     rvm install 1.9.3
@@ -74,7 +87,8 @@ github作为一个被码农关注度极高的网站，在你看不见的地方�
 
     rvm use 1.9.3
 
-4.jekyll
+### 4.jekyll
+
 通过ruby gems安装：
 
     gem install jekyll
@@ -82,14 +96,36 @@ github作为一个被码农关注度极高的网站，在你看不见的地方�
     gem install jekyll-tagging
 
 
-5.用jekyll创建博客
+### 5.用jekyll创建博客
 
-两步创建你的博客：
+1.create a new respository
 
-* Create a New Repository
+    go to your https://github.com and create a new respository named USERNAME.github.com
 
-    Go to your https://github.com and create a new repository named USERNAME.github.com
+    注意：这里的USERNAME是占位，是你的github账户名，比如我的：wuya1234.github.com
 
-* Install Jekyll-Bootstrap
+2.git clone jekyll bootstrap到本地，文件名比如就叫：wuya1234.github.com
 
-    Enter these commands into your terminal in a directory you want your blog to be:
+    git clone https://github.com/plusjade/jekyll-bootstrap.git USERNAME.github.com
+
+    cd USERNAME.github.com
+
+  修改repo地址为你的repo，然后提交即可
+
+    git remote set-url origin https://github.com/wuya1234/wuya1234.github.com.git
+    git push origin master
+
+ 
+ ### 6.本地预览
+
+jekyll还提供一个本地预览模式。通过在终端：
+
+jekyll server 
+
+按照提示,在浏览器中输入：localhost:4000
+
+就能本地预览啦，注意如果你的模板中有错误，本地预览是通不过的，通过--trace能看到哪报错进行调试
+
+调试ok就可以push到github了
+
+大功告成！！希望对你有用
