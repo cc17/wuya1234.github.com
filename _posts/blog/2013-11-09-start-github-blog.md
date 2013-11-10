@@ -1,6 +1,6 @@
 ---
-layout:     post
-title:      使用github托管你的博客
+layout: post
+title: 使用github托管你的博客
 category: blog
 description: 蛋疼，瞎折腾
 tags : [intro, beginner, jekyll, tutorial]
@@ -90,19 +90,6 @@ github作为一个被码农关注度极高的网站，在你看不见的地方�
 
     Go to your https://github.com and create a new repository named USERNAME.github.com
 
-*Install Jekyll-Bootstrap
+* Install Jekyll-Bootstrap
 
     Enter these commands into your terminal in a directory you want your blog to be:
-
-
-
-
-
-
-
-
-
-
-
-
-
