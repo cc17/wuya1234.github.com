@@ -1,3 +1,13 @@
+---
+layout: post
+title: 使用github托管你的博客
+category: blog
+description: 蛋疼，瞎折腾
+tags : [intro, beginner, jekyll, tutorial]
+---
+{% include JB/setup %}
+
+
 ##throttle/debounce: 为你的cpu减减压(前端性能优化)
 
 
