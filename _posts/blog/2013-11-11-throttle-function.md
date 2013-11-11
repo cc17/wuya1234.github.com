@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 使用github托管你的博客
+title: throttle/debounce: 为你的cpu减减压(前端性能优化)
 category: blog
-description: 蛋疼，瞎折腾
-tags : [intro, beginner, jekyll, tutorial]
+description: 函数节流
+tags : [性能优化, js, throttle, tutorial]
 ---
 {% include JB/setup %}
 
