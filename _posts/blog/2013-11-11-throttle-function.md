@@ -27,7 +27,9 @@ tags : [性能优化, js, throttle, tutorial]
 
 ##入门级写法：——拖动就fire注册的事件
 
+```
 function onResize(){
     console.log('log');
 };
 window.addEventListener('resize',onResize,false)
+```
