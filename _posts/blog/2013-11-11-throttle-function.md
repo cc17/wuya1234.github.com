@@ -33,3 +33,181 @@ function onResize(){
 };
 window.addEventListener('resize',onResize,false)
 ```
+
+##进阶级写法：——等你安静了我再调用
+
+```
+var timer = null;
+function onResize(){      
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+        console.log('log');
+    },200);
+};
+window.addEventListener('resize',onResize,false)
+```
+
+这里有个问题：引入了变量timer，它其实属于onResize的，但是你不能放到onResie里面。这样写实在是太丑了，得想办法。
+
+如果我们把这个变量注册为onResize的属性，变成：
+```
+function onResize(){
+    clearTimeout(onResize.timer);  //this is difference
+    onResize.timer = setTimeout(function(){
+        console.log('log');
+    },200);
+};
+window.addEventListener('resize',onResize,false)
+```
+插句：这种方法在proxy中用处比较大。大家都知道要移除注册给dom的事件，需要指向一致，这个proxy就可以派上用场了。i.e,仅仅是个栗子！
+```
+Contextmenu.prototype = {
+        proxy: function(fn){
+            if(!fn._contextmenu_proxy){
+                fn._contextmenu_proxy = $.proxy(fn, this);
+            }
+            return fn._contextmenu_proxy;
+        },
+        init:function(dialModel,dialView){
+            var me = this;
+            $document.on('contextmenu',me.proxy(me.onContextMenu));
+       }
+}
+```
+
+##再进阶级写法：——封装
+
+网上漫天叫嚣着“面向对象，封装，继承……” 你要不封装一个，还面向过程 是不是会喷死？
+
+上面我们其实已经实现了基础的函数节流。但我们不能每次都要写同样的逻辑吧。所以抽象一个公用函数来做这件事，具体可以这样实现。
+
+* jquery是这样做的,google 能搜到$.throttle，但是为啥我在源码里没搜到？？？
+
+* underscore.js是这样实现的：
+```
+_.throttle = function(func, wait, options) {
+    var context, args, result;
+    var timeout = null;
+    var previous = 0;
+    options || (options = {});
+    var later = function() {
+      previous = options.leading === false ? 0 : new Date;
+      timeout = null;
+      result = func.apply(context, args);
+    };
+    return function() {
+      var now = new Date;
+      if (!previous && options.leading === false) previous = now;
+      var remaining = wait - (now - previous);
+      context = this;
+      args = arguments;
+      if (remaining <= 0) {
+        clearTimeout(timeout);
+        timeout = null;
+        previous = now;
+        result = func.apply(context, args);
+      } else if (!timeout && options.trailing !== false) {
+        timeout = setTimeout(later, remaining);
+      }
+      return result;
+    };
+  };
+
+  // Returns a function, that, as long as it continues to be invoked, will not
+  // be triggered. The function will be called after it stops being called for
+  // N milliseconds. If `immediate` is passed, trigger the function on the
+  // leading edge, instead of the trailing.
+  _.debounce = function(func, wait, immediate) {
+    var timeout, args, context, timestamp, result;
+    return function() {
+      context = this;
+      args = arguments;
+      timestamp = new Date();
+      var later = function() {
+        var last = (new Date()) - timestamp;
+        if (last < wait) {
+          timeout = setTimeout(later, wait - last);
+        } else {
+          timeout = null;
+          if (!immediate) result = func.apply(context, args);
+        }
+      };
+      var callNow = immediate && !timeout;
+      if (!timeout) {
+        timeout = setTimeout(later, wait);
+      }
+      if (callNow) result = func.apply(context, args);
+      return result;
+    };
+  };
+```
+如何调用：
+```
+function updatePosition(){
+    //console.log('s');
+};
+//默认立即执行第一次，如果不想要立即执行，可以这样   _.throttle(updatePosition, 500,{leading:false});
+//默认当你停止操作时会延时执行最后一次，如果不想要，可以这样   _.throttle(updatePosition, 500,{trailing:false});
+
+var throttled = _.throttle(updatePosition, 500); 
+$(window).scroll(throttled);
+
+//debonce——debonce的意思，打个比方：你乘电梯经常碰到快要关门时有人要上，电梯得再次开了让人上来。这个过程可能反复好几次，如果我们一致等着，等到一个时间间隔没人时再关门，是不是方便很//多，不太形象，大概也能明白什么意思
+
+function calculateLayout(){
+   console.log('resize');
+		};
+//如果想要立即执行，传入参数true  _.debounce(calculateLayout, 2000,true);
+		var lazyLayout = _.debounce(calculateLayout, 2000);
+		$(window).resize(lazyLayout);
+```
+
+* 百度Tangram 貌似没有？？
+
+## 好吧，我们来实现一个简单的封装，不需要那么复杂，好理解的版本。
+
+```
+/*
+        *author@http://wuya1234.github.io
+        *思路： 1.之前已经说过，可以用setTimeout延时处理太频繁的操作  2.但是我们不想让操作过程一直没有反应，所以需要指定比如：每隔200毫秒不管怎样都执行一次
+        */
+        function throttle(fn,delay,mustRun){
+            var timer,
+                t_start,
+                previous;
+            return function(){
+                var arg = arguments,
+                    scope = this;
+                var now = +new Date;
+                var defer = function(){
+                    previous = now;
+                    fn.call(scope,arg);
+                };
+                
+                var diff = now - previous - delay;
+                if(diff <= 0){
+                    clearTimeout(timer);
+                    timeout = timer;
+                    previous = now;
+                    fn.call(scope,arg);
+                }else{
+                    timer = setTimeout(fn.call(scope,arg),diff);
+                }
+            };
+        };
+        
+        function onResize(){
+            clearTimeout(onResize.timer);
+            onResize.timer = setTimeout(function(){
+                console.log('log');
+            },200);
+        };
+        window.addEventListener('resize',throttle(onResize),false);
+```
+
+###更多相关知识
+1.[](http://remysharp.com/2010/07/21/throttling-function-calls/)
+2.[](http://benalman.com/code/projects/jquery-throttle-debounce/examples/throttle/)
+3.[](http://www.css88.com/archives/5256#more-5256)
+4.[](http://www.alloyteam.com/2012/11/javascript-throttle/)
+
