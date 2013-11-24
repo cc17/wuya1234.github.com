@@ -10,6 +10,14 @@
 		ul,li{
 			list-style: none;
 		}
+		.hottag{
+			width:1048px;
+			height: 308px;
+			position: relative;
+			margin: 0 auto;
+			margin-top: 30px;
+			box-shadow: 1px 1px 31px #000
+		}
 		.hottag li{
 			
 			position: absolute;
@@ -35,6 +43,16 @@
 		}
 		.hottag .unit-2-2{
 			font-size: 50px;
+		}
+		.reflash-btn{
+			border-radius: 4px;
+			background: -webkit-linear-gradient(top,#fff,#ebebeb);
+			border: 1px solid #999;
+			padding: 8px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			cursor: pointer;
 		}
 
 	</style>
@@ -127,7 +145,7 @@
 		render(_pos);
 		
 
-		var $reflash = $('<div  style="position:absolute;top:0;right:0;cursor:pointer;"/>').html('刷新');
+		var $reflash = $('<div class="reflash-btn"/>').html('刷新');
 		$(document.body).append($reflash);
 		$reflash.on('click',function(){
 			console.log('click');
