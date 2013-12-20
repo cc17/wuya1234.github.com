@@ -11,7 +11,7 @@
 	</style>
 </head>
 <body style="background:url(src/img/bk.jpg) no-repeat;background-size:cover;">
-<script type="text/javascript" src="../Stats.js"></script>
+<script type="text/javascript" src="src/js/Stats.js"></script>
 <script type="text/javascript">
 	var stats = new Stats();
 	stats.setMode(0); // 0: fps, 1: ms
@@ -48,7 +48,7 @@
 		img.onload = function(){
 			new Snowflow(canvas,img);
 		};
-		img.src = "http://ie.microsoft.com/testdrive/Performance/LetItSnow/res/Snowflakes.png";
+		img.src = "src/img/Snowflakes.png";
 	})();
 	//initSnowflower
 	var Snowflow = function(canvas,img){
